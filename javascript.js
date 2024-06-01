@@ -131,20 +131,20 @@ const Game = (function(){
     let firstPlayerTurn = true;  // Keeps track whose turn it is.
 
     // Gameloop
-    while (true) {
-        const result = checkIfWon();
-        if (result === 1) {
-            console.log("Player 1 has won the match");
-            break;
-        } else if (result === 2) {
-            console.log("Player 2 has won the match");
-            break;
-        } else {
-            console.log("Next player's turn");
-            playRound();
+    function gameLoop() 
+        {while (true) {
+            const result = checkIfWon();
+            if (result === 1) {
+                console.log("Player 1 has won the match");
+                break;
+            } else if (result === 2) {
+                console.log("Player 2 has won the match");
+                break;
+            } else {
+                console.log("Next player's turn");
+                playRound();
+            }
         }
-
-
     }
 
     function checkIfWon() {
@@ -205,10 +205,9 @@ const Game = (function(){
     }
 ;
     return {
-        checkIfWon,
-        playRound,
+        gameLoop
     }
 })();
 
-
+Game.gameLoop();
 
