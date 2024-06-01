@@ -1,11 +1,19 @@
 const readlineSync = require('readline-sync');
 
 const GameBoard = (function() {
-    const gameBoard = [
+    let gameBoard = [
         ['.', '.', '.'],
         ['.', '.', '.'],
         ['.', '.', '.'],
     ];
+
+    function resetBoard() {
+        gameBoard = [
+            ['.', '.', '.'],
+            ['.', '.', '.'],
+            ['.', '.', '.'],
+        ];
+    };
 
     function printBoard() {
         for (let row in gameBoard){
@@ -89,7 +97,8 @@ const GameBoard = (function() {
         gameBoard,
         setCell,
         printBoard,
-        checkGameState
+        checkGameState,
+        resetBoard,
     }
 })();
 
@@ -119,11 +128,10 @@ function createPlayer(name) {
 const Game = (function(){
     const player1 = createPlayer('Stijn');
     const player2 = createPlayer('Eva');
-    let firstPlayerTurn = true;
+    let firstPlayerTurn = true;  // Keeps track whose turn it is.
 
     // Gameloop
     while (true) {
-        playRound();
         const result = checkIfWon();
         if (result === 1) {
             console.log("Player 1 has won the match");
@@ -133,13 +141,16 @@ const Game = (function(){
             break;
         } else {
             console.log("Next player's turn");
+            playRound();
         }
+
+
     }
 
     function checkIfWon() {
-        if (player1.checkWon) {
+        if (player1.checkWon()) {
             return 1;
-        } else if (player2.checkWon) {
+        } else if (player2.checkWon()) {
             return 2;
         };
     };
@@ -166,16 +177,21 @@ const Game = (function(){
 
         // Execute command
         GameBoard.setCell(row, col, char);
-        GameBoard.printBoard();
         const stateAtRoundEnd = GameBoard.checkGameState();
         
         if (stateAtRoundEnd && firstPlayerTurn) {
             console.log("Player 1 has won this round");
             player1.increaseWins();
-            firstPlayerTurn = false;
+            firstPlayerTurn = true;
+            GameBoard.resetBoard();
         } else if (stateAtRoundEnd && !firstPlayerTurn) {
             console.log("Player 2 has won this round");
             player2.increaseWins();
+            firstPlayerTurn = true;
+            GameBoard.resetBoard();
+        } else if (firstPlayerTurn) {
+            firstPlayerTurn = false;
+        } else {
             firstPlayerTurn = true;
         }
     }
@@ -196,5 +212,3 @@ const Game = (function(){
 
 
 
-
-Game.playRound();
