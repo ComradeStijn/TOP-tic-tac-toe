@@ -1,3 +1,5 @@
+const readlineSync = require('readline-sync');
+
 const GameBoard = (function() {
     const gameBoard = [
         ['.', '.', '.'],
@@ -117,10 +119,82 @@ function createPlayer(name) {
 const Game = (function(){
     const player1 = createPlayer('Stijn');
     const player2 = createPlayer('Eva');
-    GameBoard.setCell(0, 0, 'O');
-    GameBoard.setCell(1, 0, 'O');
-    GameBoard.setCell(2, 0, 'O');
-    GameBoard.printBoard();
-    console.log(GameBoard.checkGameState());
+    let firstPlayerTurn = true;
 
+    // Gameloop
+    while (true) {
+        playRound();
+        const result = checkIfWon();
+        if (result === 1) {
+            console.log("Player 1 has won the match");
+            break;
+        } else if (result === 2) {
+            console.log("Player 2 has won the match");
+            break;
+        } else {
+            console.log("Next player's turn");
+        }
+    }
+
+    function checkIfWon() {
+        if (player1.checkWon) {
+            return 1;
+        } else if (player2.checkWon) {
+            return 2;
+        };
+    };
+
+    function playRound() {
+        let row = "";
+        let col = "";
+        let char = "";
+
+        GameBoard.printBoard();
+
+        // Get user input
+        if (firstPlayerTurn) {
+            const prompt = promptForInput(firstPlayerTurn);
+            row = parseInt(prompt.myRow) - 1;
+            col = parseInt(prompt.myCol) - 1;
+            char = "X";
+        } else {
+            const prompt = promptForInput(firstPlayerTurn);
+            row = parseInt(prompt.myRow) - 1;
+            col = parseInt(prompt.myCol) - 1;
+            char = "O";
+        }
+
+        // Execute command
+        GameBoard.setCell(row, col, char);
+        GameBoard.printBoard();
+        const stateAtRoundEnd = GameBoard.checkGameState();
+        
+        if (stateAtRoundEnd && firstPlayerTurn) {
+            console.log("Player 1 has won this round");
+            player1.increaseWins();
+            firstPlayerTurn = false;
+        } else if (stateAtRoundEnd && !firstPlayerTurn) {
+            console.log("Player 2 has won this round");
+            player2.increaseWins();
+            firstPlayerTurn = true;
+        }
+    }
+
+    // Sets row and col
+    function promptForInput(firstPlayerTurn) {
+        const playerNumber = firstPlayerTurn ? 1 : 2;
+        let myRow = readlineSync.question(`Player ${playerNumber}. Row: `);
+        let myCol = readlineSync.question(`Player ${playerNumber}. Col: `);
+        return {myRow, myCol};
+    }
+;
+    return {
+        checkIfWon,
+        playRound,
+    }
 })();
+
+
+
+
+Game.playRound();
