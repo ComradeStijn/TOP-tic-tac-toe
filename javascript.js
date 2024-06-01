@@ -20,7 +20,13 @@ const GameBoard = (function() {
             console.log(`Error: setCell(row, col, char). Row or col is out of bounds`);
             return;
         }
-        gameBoard[row][col] = char;
+        if (gameBoard[row][col] === '.') {
+            gameBoard[row][col] = char;
+            return true;
+        } else {
+            console.log(`Error: cell already contains a value`);
+            return;
+        }
     };
 
     function checkGameState() {
@@ -88,7 +94,7 @@ const Game = (function(){
     const player2 = createPlayer('Eva');
     GameBoard.setCell(2, 0, 'O');
     GameBoard.setCell(2, 1, 'O');
-    GameBoard.setCell(2, 2, 'O');
+    GameBoard.setCell(2, 1, 'O');
     GameBoard.printBoard();
     console.log(GameBoard.checkGameState());
 
