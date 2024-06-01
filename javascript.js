@@ -48,6 +48,31 @@ const GameBoard = (function() {
             }
         }
 
+        // Descending Diagonal
+        const descResult = (function() {
+            const ColToCheck = [];
+            for (let i = 0; i < 3; i++) {
+                ColToCheck.push(gameBoard[i][i])
+            }
+            return checkWin(ColToCheck);
+        })();
+        if (descResult) {
+            return gameBoard[0][0];
+        }
+
+        // Ascending diagonal
+        const ascResult = (function() {
+            const ColToCheck = [];
+            for (let i = 0; i < 3; i++) {
+                ColToCheck.push(gameBoard[i][2 - i]);
+            }
+            return checkWin(ColToCheck);
+        })();
+        if (ascResult) {
+            return gameBoard[0][2];
+        }
+
+
         return false;
     }
 
@@ -92,9 +117,9 @@ function createPlayer(name) {
 const Game = (function(){
     const player1 = createPlayer('Stijn');
     const player2 = createPlayer('Eva');
+    GameBoard.setCell(0, 0, 'O');
+    GameBoard.setCell(1, 0, 'O');
     GameBoard.setCell(2, 0, 'O');
-    GameBoard.setCell(2, 1, 'O');
-    GameBoard.setCell(2, 1, 'O');
     GameBoard.printBoard();
     console.log(GameBoard.checkGameState());
 
