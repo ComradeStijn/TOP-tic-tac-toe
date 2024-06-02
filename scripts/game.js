@@ -60,8 +60,13 @@ const Game = (function(){
         // Execute command
         GameBoard.setCell(row, col, char);
         const stateAtRoundEnd = GameBoard.checkGameState();
-        
-        if (stateAtRoundEnd && firstPlayerTurn) {
+        if (stateAtRoundEnd === "filled") {
+            console.log("Nobody won the game");
+            firstPlayerTurn = true;
+
+            Renderer.setGameover(true, false);
+            Renderer.setSymbol("X");
+        } else if (stateAtRoundEnd && firstPlayerTurn) {
             console.log("Player 1 has won this round");
             player1.increaseWins();
             firstPlayerTurn = true;
@@ -69,7 +74,6 @@ const Game = (function(){
             Renderer.setGameover(true, player1);
             Renderer.setScore(player1, player2);
             Renderer.setSymbol("X")
-
         } else if (stateAtRoundEnd && !firstPlayerTurn) {
             console.log("Player 2 has won this round");
             player2.increaseWins();

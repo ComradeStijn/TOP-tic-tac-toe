@@ -81,6 +81,19 @@ const GameBoard = (function() {
         }
 
 
+        // Board filled with no winner
+        const flatBoard = gameBoard.reduce((acc, val) => acc.concat(val), []);
+        let filled = true;
+        for (let cell of flatBoard) {
+            if (cell === '.') {
+                filled = false;
+                break
+            }
+        }
+        if (filled === true) {
+            return "filled";
+        }
+
         return false;
     }
 

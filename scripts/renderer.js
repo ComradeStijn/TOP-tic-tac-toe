@@ -28,7 +28,10 @@ const Renderer = (function() {
     function setGameover(toSet, winningPlayer) {
         const playerElement = document.querySelector("#player");
         gameOver = toSet;
-        if (gameOver) {
+        if (winningPlayer === false) {
+            playerElement.textContent = "No player has won this round";
+            nextGameButton.parentElement.classList.remove("hidden");
+        } else if (gameOver) {
             playerElement.textContent = `${winningPlayer.getName()} has won this round`;
             nextGameButton.parentElement.classList.remove("hidden");
         } else {
