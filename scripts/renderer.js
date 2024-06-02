@@ -6,6 +6,7 @@ import Game from './game.js';
 const Renderer = (function() {
     const cells = Array.from(document.querySelectorAll('.grid-cell'));
     const nextGameButton = document.querySelector("#next-game");
+    const resetGameButton = document.querySelector("#reset-score");
     let symbol = "X";
     let gameOver = false;
 
@@ -31,11 +32,16 @@ const Renderer = (function() {
 
     // nextgamebutton event listener
     nextGameButton.addEventListener("click", (event) => {
-        Game.resetGame();
+        Game.nextGame();
         setGameover(false);
     });
 
-
+    // Reset game button event listener
+    resetGameButton.addEventListener("click", () => {
+        resetBoard();
+        Game.resetGame();
+        setGameover(false);
+    });
 
 
     // GameBoard renderer
@@ -59,11 +65,13 @@ const Renderer = (function() {
 
     // Score renderer
 
-    function setScore(first, second) {
+    function setScore(firstUser, secondUser) {
         const player1 = document.querySelector("#player1-score");
         const player2 = document.querySelector("#player2-score");
-        player1.textContent = first;
-        player2.textContent = second;
+        const firstScore = firstUser.getWins();
+        const secondScore = secondUser.getWins();
+        player1.textContent = firstScore;
+        player2.textContent = secondScore;
 
     }
 
