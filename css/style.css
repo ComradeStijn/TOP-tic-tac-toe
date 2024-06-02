@@ -104,6 +104,12 @@ html {
     }
 }
 
+.cell-hover {
+    color: white;
+}
+
+
+
 .hidden {
     display: none;
 }
