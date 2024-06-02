@@ -5,6 +5,7 @@ import Game from './game.js';
 
 const Renderer = (function() {
     const cells = Array.from(document.querySelectorAll('.grid-cell'));
+    const nextGameButton = document.querySelector("#next-game");
     let symbol = "X";
     let gameOver = false;
 
@@ -20,22 +21,30 @@ const Renderer = (function() {
 
     function setGameover(toSet) {
         gameOver = toSet;
+        if (gameOver) {
+            nextGameButton.classList.remove("hidden");
+        } else {
+            nextGameButton.classList.add("hidden");
+        }
     };
 
 
-
-    
-
+    // nextgamebutton event listener
+    nextGameButton.addEventListener("click", (event) => {
+        Game.resetGame();
+        setGameover(false);
+    });
 
 
 
 
     // GameBoard renderer
     function resetBoard() {
+        console.log('resetBoard called');
         const cleanBoard = [
-            ['.', '.', '.'],
-            ['.', '.', '.'],
-            ['.', '.', '.'],
+            ['', '', ''],
+            ['', '', ''],
+            ['', '', ''],
         ];
         renderGameBoard(cleanBoard);
     }
@@ -43,9 +52,7 @@ const Renderer = (function() {
     function renderGameBoard(gameBoard) {
         const flatBoard = gameBoard.reduce((acc, val) => acc.concat(val), []);
         for (let index in flatBoard) {
-            if (flatBoard[index] !== '.') {
-                cells[index].textContent = flatBoard[index]; 
-            }
+            cells[index].textContent = flatBoard[index]; 
         }
 
     }

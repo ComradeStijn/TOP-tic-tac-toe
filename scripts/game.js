@@ -13,7 +13,12 @@ const Game = (function(){
     let firstPlayerTurn = true;  // Keeps track whose turn it is.
 
 
-
+    // Reset Game 
+    function resetGame() {
+        firstPlayerTurn = true;
+        Renderer.resetBoard;
+        GameBoard.resetBoard;
+    }
 
     // Receive event from renderer
     function receiveClick(event) {
@@ -63,6 +68,7 @@ const Game = (function(){
 ;
     return {
         receiveClick,
+        resetGame,
     }
 })();
 
