@@ -26,9 +26,52 @@ html {
     width: 25rem;
     height: 50rem;
     margin-left: 10vw;
+    padding: 2rem;
     background-color: var(--fourth-color);
     border-radius: 50px;
     flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .score-counter {
+        background-color: var(--second-color);
+        padding: 1rem;
+        border-radius: 50px;
+    }
+
+    #player1-label, #player2-label {
+        text-align: center;
+    }
+
+    #player1-score, #player2-score {
+        text-align: center;
+        font-size: 4rem;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: auto;
+        margin-bottom: 1rem;
+
+        button {
+            width: 50%;
+            padding: 2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background-color: var(--third-color);
+            border: none;
+            border-radius: 500px;
+        }
+        button:hover {
+            outline: 5px solid var(--third-color);
+            background-color: inherit;
+            color: white;
+        }
+    }
 }
 
 .container {
@@ -64,3 +107,4 @@ html {
 .hidden {
     display: none;
 }
+
