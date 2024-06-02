@@ -1,4 +1,4 @@
-function createPlayer(name) {
+export default function createPlayer(name) {
     let wins = 0;
 
     function getWins() {
@@ -20,4 +20,3 @@ function createPlayer(name) {
     return {name, getWins, increaseWins, resetWins, checkWon};
 }
 
-module.exports = createPlayer;

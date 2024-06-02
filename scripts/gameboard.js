@@ -100,4 +100,4 @@ const GameBoard = (function() {
     }
 })();
 
-module.exports = GameBoard;
+export default GameBoard;

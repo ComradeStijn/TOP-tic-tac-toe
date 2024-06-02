@@ -1,6 +1,9 @@
-const createPlayer = require('./player');
-const GameBoard = require('./gameboard');
-const readlineSync = require('readline-sync');
+// const createPlayer = require('./player');
+// const GameBoard = require('./gameboard');
+// const readlineSync = require('readline-sync');
+
+import createPlayer from './player.js';
+import GameBoard from './gameboard.js';
 
 
 const Game = (function(){
@@ -76,10 +79,11 @@ const Game = (function(){
 
     // Sets row and col
     function promptForInput(firstPlayerTurn) {
-        const playerNumber = firstPlayerTurn ? 1 : 2;
-        let myRow = readlineSync.question(`Player ${playerNumber}. Row: `);
-        let myCol = readlineSync.question(`Player ${playerNumber}. Col: `);
-        return {myRow, myCol};
+        // const playerNumber = firstPlayerTurn ? 1 : 2;
+        // let myRow = readlineSync.question(`Player ${playerNumber}. Row: `);
+        // let myCol = readlineSync.question(`Player ${playerNumber}. Col: `);
+        // return {myRow, myCol};
+        return;
     }
 ;
     return {
@@ -87,4 +91,4 @@ const Game = (function(){
     }
 })();
 
-module.exports = Game;
+export default Game;
