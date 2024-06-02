@@ -67,8 +67,8 @@ const Renderer = (function() {
     setName.addEventListener("click", (e) => {
         const player1Element = document.querySelector("#player1");
         const player2Element = document.querySelector("#player2");
-        const player1NewName = player1Element.value;
-        const player2NewName = player1Element.value;
+        const player1NewName = player1Element.value || "Player 1";
+        const player2NewName = player2Element.value || "Player 2";
         
         // Render and set gamelogic names
         document.querySelector("#player1-label").textContent = `${player1NewName} points:`;
