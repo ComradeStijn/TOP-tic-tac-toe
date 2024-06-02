@@ -8,8 +8,8 @@ import Renderer from './renderer.js';
 
 
 const Game = (function(){
-    const player1 = createPlayer('Player1');
-    const player2 = createPlayer('Player2');
+    const player1 = createPlayer('Player 1');
+    const player2 = createPlayer('Player 2');
     let firstPlayerTurn = true;  // Keeps track whose turn it is.
 
 
@@ -28,8 +28,8 @@ const Game = (function(){
         GameBoard.resetBoard();
         GameBoard.printBoard();
         player1.resetWins();
-        player2.resetWins;
-
+        player2.resetWins();
+        Renderer.setScore(player1, player2);
     }
 
     // Receive event from renderer
@@ -66,7 +66,7 @@ const Game = (function(){
             player1.increaseWins();
             firstPlayerTurn = true;
 
-            Renderer.setGameover(true);
+            Renderer.setGameover(true, player1);
             Renderer.setScore(player1, player2);
             Renderer.setSymbol("X")
 
@@ -75,7 +75,7 @@ const Game = (function(){
             player2.increaseWins();
             firstPlayerTurn = true;
 
-            Renderer.setGameover(true);
+            Renderer.setGameover(true, player2);
             Renderer.setScore(player1, player2);
             Renderer.setSymbol("X");
 
@@ -92,6 +92,8 @@ const Game = (function(){
         receiveClick,
         resetGame,
         nextGame,
+        player1,
+        player2,
     }
 })();
 

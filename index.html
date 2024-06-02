@@ -21,7 +21,7 @@
             </div>
             <div class="button-container">
                 <button id="reset-score">Reset</button>
-                <button id="set-name">Set Players</button>
+                <button id="set-players">Set Players</button>
             </div>
         </aside>
         <div class="container">
@@ -36,8 +36,22 @@
                 <div class="grid-cell" data-row="2" data-col="1"></div>
                 <div class="grid-cell" data-row="2" data-col="2"></div>
             </section>
-            <button id="next-game" class="hidden">Next game</button>
         </div>
     </main>
+    <div id="win-screen" class="win-screen hidden">
+        <span id="player"></span>
+        <button id="next-game">Next game</button>
+    </div>
+    <div id="rename-screen" class="rename-screen">
+        <div class="name-input">
+            <label for="player1">First Player's name: </label>
+            <input type="text" name="player1" id="player1">
+        </div>
+        <div class="name-input">
+            <label for="player2">Second Player's name:</label>
+            <input type="text" name="player2" id="player2">
+        </div>
+        <button id="set-name">Set Name</button>
+    </div>
 </body>
 </html>

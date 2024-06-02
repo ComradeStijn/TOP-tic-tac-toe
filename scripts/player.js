@@ -2,7 +2,13 @@ export default function createPlayer(myName) {
     let wins = 0;
     let name = myName;
 
+    function setName(newName) {
+        name = newName;
+    }
 
+    function getName() {
+        return name;
+    }
 
     function getWins() {
         return wins;
@@ -20,6 +26,6 @@ export default function createPlayer(myName) {
         return (wins === 3);
     }
 
-    return {name, getWins, increaseWins, resetWins, checkWon};
+    return {setName, getName, getWins, increaseWins, resetWins, checkWon};
 }
 

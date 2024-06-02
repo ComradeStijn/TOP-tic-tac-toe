@@ -12,7 +12,7 @@ const Renderer = (function() {
 
     setSymbol(symbol);
 
-
+    // Set the current symbol between "X" and "O";
     function setSymbol(toSymbol) {
         console.log("setSymbol called");
         symbol = toSymbol;
@@ -20,28 +20,70 @@ const Renderer = (function() {
         setListeners();    // Set new event listeners
     };
 
-    function setGameover(toSet) {
+
+
+
+
+    // Show gameover modal
+    function setGameover(toSet, winningPlayer) {
+        const playerElement = document.querySelector("#player");
         gameOver = toSet;
         if (gameOver) {
-            nextGameButton.classList.remove("hidden");
+            playerElement.textContent = `${winningPlayer.getName()} has won this round`;
+            nextGameButton.parentElement.classList.remove("hidden");
         } else {
-            nextGameButton.classList.add("hidden");
+            nextGameButton.parentElement.classList.add("hidden");
         }
     };
-
 
     // nextgamebutton event listener
     nextGameButton.addEventListener("click", (event) => {
         Game.nextGame();
-        setGameover(false);
+        setGameover(false, null);
     });
 
     // Reset game button event listener
     resetGameButton.addEventListener("click", () => {
         resetBoard();
         Game.resetGame();
-        setGameover(false);
+        setGameover(false, null);
     });
+
+
+
+    //  Change name modal
+    //
+    // setPlayers button 
+    const setPlayers = document.querySelector("#set-players");
+    setPlayers.addEventListener("click", () => {
+        document.querySelector("#rename-screen").classList.remove("hidden");
+    });
+
+    // setName button
+    const setName = document.querySelector("#set-name");
+    setName.addEventListener("click", (e) => {
+        const player1NewName = document.querySelector("#player1").value;
+        const player2NewName = document.querySelector("#player2").value;
+        
+        // Render and set gamelogic names
+        document.querySelector("#player1-label").textContent = `${player1NewName} points:`;
+        document.querySelector("#player2-label").textContent = `${player2NewName} points:`;
+        Game.player1.setName(player1NewName);
+        Game.player2.setName(player2NewName);
+
+        document.querySelector("#rename-screen").classList.add("hidden")
+    })
+
+
+
+
+
+
+
+
+
+
+
 
 
     // GameBoard renderer
@@ -60,20 +102,24 @@ const Renderer = (function() {
         for (let index in flatBoard) {
             cells[index].textContent = flatBoard[index]; 
         }
-
     }
+
+
+
+
 
     // Score renderer
-
     function setScore(firstUser, secondUser) {
-        const player1 = document.querySelector("#player1-score");
-        const player2 = document.querySelector("#player2-score");
+        const player1ScoreField = document.querySelector("#player1-score");
+        const player2ScoreField = document.querySelector("#player2-score");
         const firstScore = firstUser.getWins();
         const secondScore = secondUser.getWins();
-        player1.textContent = firstScore;
-        player2.textContent = secondScore;
-
+        player1ScoreField.textContent = firstScore;
+        player2ScoreField.textContent = secondScore;
     }
+
+
+
 
 
 

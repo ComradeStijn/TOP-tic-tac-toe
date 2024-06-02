@@ -110,7 +110,54 @@ html {
 
 
 
+.win-screen, .rename-screen {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 3rem;
+
+    p, .name-input, span {
+        padding: 2rem;
+        font-size: 4rem;
+        font-weight: bold;
+        text-align: center;
+        background-color: white;
+        border-radius: 100px;
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    }
+    .name-input{
+        padding: 3rem;
+        width: 50rem;
+        font-size: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 3rem;
+    }
+    button {
+        width: fit-content;
+        padding: 2rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        background-color: var(--fourth-color);
+        border: none;
+        border-radius: 500px;
+    }
+    button:hover {
+        outline: 5px solid var(--fourth-color);
+        background-color: inherit;
+        color: white;
+    }
+}
+
+
 .hidden {
     display: none;
 }
-
