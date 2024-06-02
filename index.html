@@ -17,7 +17,7 @@
             </div>
             <div class="score-counter">
                 <h2 id="player2-label">Player 2 points:</h2>
-                <h1 id="player1-score">3</h1>
+                <h1 id="player2-score">3</h1>
             </div>
             <div class="button-container">
                 <button id="reset-score">Reset</button>
@@ -26,16 +26,17 @@
         </aside>
         <div class="container">
             <section class="grid-container">
-                <div class="grid-cell">O</div>
-                <div class="grid-cell"></div>
-                <div class="grid-cell"></div>
-                <div class="grid-cell"></div>
-                <div class="grid-cell"></div>
-                <div class="grid-cell"></div>
-                <div class="grid-cell"></div>
-                <div class="grid-cell"></div>
-                <div class="grid-cell"></div>
+                <div class="grid-cell" data-row="0" data-col="0" ></div>
+                <div class="grid-cell" data-row="0" data-col="1"></div>
+                <div class="grid-cell" data-row="0" data-col="2"></div>
+                <div class="grid-cell" data-row="1" data-col="0"></div>
+                <div class="grid-cell" data-row="1" data-col="1"></div>
+                <div class="grid-cell" data-row="1" data-col="2"></div>
+                <div class="grid-cell" data-row="2" data-col="0"></div>
+                <div class="grid-cell" data-row="2" data-col="1"></div>
+                <div class="grid-cell" data-row="2" data-col="2"></div>
             </section>
+            <button id="next-game">Next game</button>
         </div>
     </main>
 </body>
